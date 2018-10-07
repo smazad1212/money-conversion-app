@@ -84,3 +84,5 @@ modules.xml
 # End of https://www.gitignore.io/api/webstorm+all
 
 .vscode
+
+./node-modules
