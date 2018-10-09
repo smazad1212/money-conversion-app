@@ -1,10 +1,39 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { createStore } from 'redux'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import debounce from 'lodash.debounce'
 
 
-class FeesTable extends React.Component {
+let defaultState = {
+  originAmount: '0.00'
+}
+
+//reducer
+function amount(state = defaultState, action) {
+  if (action.type === 'CHANGE_ORIGIN_AMOUNT') {
+    return {
+      ...state,
+      originAmount: action.data
+    }
+  }
+
+  return state
+}
+
+// store
+let store = createStore(amount)
+
+store.subscribe(() => {
+  console.log('state', store.getState())
+})
+
+store.dispatch({ type: 'CHANGE_ORIGIN_AMOUNT', data: '300.65' })
+store.dispatch({ type: '' })
+store.dispatch({ type: '' })
+
+
+class FeesTable extends Component {
   render() {
     var { conversionRate, fee, total, originCurrency, destinationCurrency } = this.props
 
@@ -38,7 +67,7 @@ FeesTable.propTypes = {
   destinationCurrency: PropTypes.string.isRequired
 }
 
-class Conversion extends React.Component {
+class Conversion extends Component {
   constructor(props) {
     super(props)
     this.state = {
