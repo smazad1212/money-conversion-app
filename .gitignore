@@ -85,6 +85,4 @@ modules.xml
 
 .vscode
 
-./node-modules
-
-node-modules/*
+node_modules/*
